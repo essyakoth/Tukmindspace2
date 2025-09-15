@@ -1,6 +1,9 @@
 from flask import Flask, render_template
+import os
 
+# Create the Flask app
 app = Flask(__name__)
+
 # List of articles for the About page
 about_articles = [
     {
@@ -20,30 +23,28 @@ about_articles = [
     }
 ]
 
-
-# Home page
-@app.route('/')
+# Routes
+@app.route("/")
 def home():
-    return render_template('index.html')
+    return render_template("index.html")
 
-@app.route('/about')
+@app.route("/about")
 def about():
-    return render_template('about.html', articles=about_articles)
+    return render_template("about.html", articles=about_articles)
 
-# FAQs page
-@app.route('/faqs')
+@app.route("/faqs")
 def faqs():
-    return render_template('faqs.html')
+    return render_template("faqs.html")
 
-# Resources page
-@app.route('/resources')
+@app.route("/resources")
 def resources():
-    return render_template('resources.html')
+    return render_template("resources.html")
 
-# Student Info page
-@app.route('/student-info')
+@app.route("/student-info")
 def student_info():
-    return render_template('student_info.html')
+    return render_template("student_info.html")
 
-if __name__ == '__main__':
-    app.run(debug=True)
+# Run the app
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
